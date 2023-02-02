@@ -49,6 +49,7 @@ if (isMainThread) {
   const router = async (req, res) => {
     if (req.url === "/fib") {
       const jobs = await execFib(46);
+      res.setHeader("Content-Type", "application/json");
       res.write(JSON.stringify(jobs));
       res.end();
     } else {
