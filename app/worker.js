@@ -1,7 +1,6 @@
 const { parentPort, workerData } = require("node:worker_threads");
 
-parentPort.postMessage(`Start workers ${process.pid}`);
-
+parentPort.postMessage(`Start workers ${process.pid}\n`);
 // Функция фибоначи
 function fib(n) {
   if (n < 2) {
