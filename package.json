@@ -7,7 +7,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start:dev": "npx nodemon app/server.js",
 		"start": "cross-env PORT=5000 npx nodemon  app/server.js",
-		"start:prod": "webpack && nodemon app-bundle/server.min.js"
+		"start:prod": "webpack && nodemon app-bundle/server.min.js",
+		"start:devs": "npx nodemon app/server-http-promise.js"
 	},
 	"author": "",
 	"license": "ISC",

@@ -3,7 +3,7 @@ const { cpus } = require("node:os");
 const { Worker, isMainThread } = require("node:worker_threads");
 const http = require("http");
 
-const workerScript = "./worker.js";
+const workerScript = "./worker-http-get-request.js";
 
 env.config();
 const PORT = process.env.PORT || null;
@@ -41,6 +41,13 @@ const execFib = async (number) => {
   return await Promise.all(data);
 };
 
+const execApi = async (uri) => {
+  workersPool.forEach((item) => item.postMessage(uri));
+  // Промифицируем результаты
+  const data = workersPool.map((item) => PromisifyWorker(item));
+  return await Promise.all(data);
+};
+
 if (isMainThread) {
   for (let i = 0; i < numCpus; i++) {
     createWorker(i);
@@ -49,6 +56,16 @@ if (isMainThread) {
   const router = async (req, res) => {
     if (req.url === "/fib") {
       const jobs = await execFib(46);
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(jobs));
+      res.end();
+    } else if (req.url === "/api") {
+      const jobs = await execApi("https://belarusbank.by/api/kursExchange");
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(jobs));
+      res.end();
+    } else if (req.url === "/loft") {
+      const jobs = await execApi("https://sv-loft.by");
       res.setHeader("Content-Type", "application/json");
       res.write(JSON.stringify(jobs));
       res.end();
