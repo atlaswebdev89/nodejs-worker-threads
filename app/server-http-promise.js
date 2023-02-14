@@ -3,9 +3,9 @@ const { cpus } = require("node:os");
 const { Worker, isMainThread } = require("node:worker_threads");
 const http = require("http");
 
-const workerScript = "./worker-http-get-request.js";
-
+const workerScript = "./worker.js";
 env.config();
+const HOST = "0.0.0.0";
 const PORT = process.env.PORT || null;
 if (PORT === null) {
   process.stdout.write("\nNot set port or not found .env file");
@@ -55,7 +55,7 @@ if (isMainThread) {
 
   const router = async (req, res) => {
     if (req.url === "/fib") {
-      const jobs = await execFib(46);
+      const jobs = await execFib(10);
       res.setHeader("Content-Type", "application/json");
       res.write(JSON.stringify(jobs));
       res.end();
@@ -75,7 +75,7 @@ if (isMainThread) {
     }
   };
 
-  http.createServer(router).listen(PORT, () => {
+  http.createServer(router).listen(PORT, HOST, () => {
     process.stdout.write(`Server start in port ${PORT}\n`);
   });
 } else {

@@ -3,7 +3,7 @@ const { cpus } = require("node:os");
 const { Worker, isMainThread } = require("node:worker_threads");
 const http = require("http");
 
-const workerScript = "./worker.js";
+const workerScript = "./worker-http-get-request.js";
 
 env.config();
 const PORT = process.env.PORT || null;
