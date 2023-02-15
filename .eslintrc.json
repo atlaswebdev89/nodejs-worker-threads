@@ -1,45 +1,50 @@
 {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": [
-    //"eslint:recommended",
-    "airbnb-base",
-    "plugin:import/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:node/recommended",
-    "plugin:prettier/recommended"
-    // или просто prettier
-  ],
-  "plugins": ["import", "prettier"],
-  "overrides": [],
-  "parserOptions": {
-    "ecmaVersion": "latest"
-  },
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      { "singleQuote": false, "parser": "flow", "semi": true }
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        //"eslint:recommended",
+        "airbnb-base",
+        "plugin:import/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:node/recommended",
+        "plugin:prettier/recommended"
+        // или просто prettier
     ],
-    "arrow-body-style": "off",
-    "prefer-arrow-callback": "off",
-    "max-len": "off",
-    "no-console": "off",
-    "import/no-unresolved": [2, { "commonjs": false, "amd": true }],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": true,
-        "peerDependencies": true
-      }
-    ],
-    "global-require": 0,
-    "no-process-exit": "off",
-    "node/no-process-exit": "off"
-  }
+    "plugins": ["import", "prettier"],
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": false,
+                "parser": "flow",
+                "semi": true,
+                "tabWidth": 4
+            }
+        ],
+        "arrow-body-style": "off",
+        "prefer-arrow-callback": "off",
+        "max-len": "off",
+        "no-console": "off",
+        "import/no-unresolved": [2, { "commonjs": false, "amd": true }],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true,
+                "optionalDependencies": true,
+                "peerDependencies": true
+            }
+        ],
+        "global-require": 0,
+        "no-process-exit": "off",
+        "node/no-process-exit": "off"
+    }
 }
