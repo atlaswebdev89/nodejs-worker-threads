@@ -3,7 +3,6 @@ const { cpus } = require("node:os");
 const { Worker, isMainThread } = require("node:worker_threads");
 const http = require("http");
 
-const workerScript = "./worker.js";
 env.config();
 const HOST = "0.0.0.0";
 const PORT = process.env.PORT || null;
@@ -38,18 +37,18 @@ const execFib = async (number) => {
   workersPool.forEach((item) => item.postMessage(number));
   // Промифицируем результаты
   const data = workersPool.map((item) => PromisifyWorker(item));
-  return await Promise.all(data);
+  return Promise.all(data);
 };
 
 const execApi = async (uri) => {
   workersPool.forEach((item) => item.postMessage(uri));
   // Промифицируем результаты
   const data = workersPool.map((item) => PromisifyWorker(item));
-  return await Promise.all(data);
+  return Promise.all(data);
 };
 
 if (isMainThread) {
-  for (let i = 0; i < numCpus; i++) {
+  for (let i = 0; i < numCpus; i += 1) {
     createWorker(i);
   }
 
@@ -79,5 +78,5 @@ if (isMainThread) {
     process.stdout.write(`Server start in port ${PORT}\n`);
   });
 } else {
-  const worker = require(workerScript);
+  require("./worker-http-get-request");
 }

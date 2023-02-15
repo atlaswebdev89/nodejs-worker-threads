@@ -8,7 +8,7 @@ const HOST = "0.0.0.0";
 const PORT = process.env.PORT || null;
 if (PORT === null) {
   process.stdout.write("\nNot set port or not found .env file");
-  process.exit();
+  process.exit(0);
 }
 
 const numCpus = cpus().length;
